@@ -1,7 +1,7 @@
-import { DATABASE_URL } from '@/config/env';
+import { env } from '@/config/env';
 import mongoose from 'mongoose';
 
-if (!DATABASE_URL) {
+if (!env.DATABASE_URL) {
 	throw new Error('Please provide DATABASE_URL in the environment variables');
 }
 
@@ -18,7 +18,7 @@ const connectDB = async () => {
 
 	if (!cached.promise) {
 		cached.promise = mongoose
-			.connect(DATABASE_URL)
+			.connect(env.DATABASE_URL)
 			.then((mongoose) => mongoose.connection);
 	}
 
