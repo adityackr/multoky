@@ -1,9 +1,11 @@
+import { Toaster } from '@/components/ui/sonner';
+import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
+import { Geist } from 'next/font/google';
 import './globals.css';
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { SessionProvider } from 'next-auth/react';
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
 	title: 'Multoky',
@@ -16,8 +18,16 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={cn("font-sans", geist.variable)}>
-			<body className="min-h-full flex flex-col">{children}</body>
+		<html lang="en" className={cn('font-sans dark', geist.variable)}>
+			<body
+				suppressHydrationWarning
+				className="min-h-full flex flex-col bg-background"
+			>
+				<SessionProvider>
+					{children}
+					<Toaster />
+				</SessionProvider>
+			</body>
 		</html>
 	);
 }
