@@ -167,6 +167,7 @@ export const LoginForm = () => {
 					whileHover={{ scale: 1.05 }}
 					whileTap={{ scale: 0.95 }}
 					disabled={loading}
+					onClick={() => signIn('google', { callbackUrl: '/' })}
 				>
 					<FcGoogle className="mr-2" /> Login with Google
 				</MotionButton>

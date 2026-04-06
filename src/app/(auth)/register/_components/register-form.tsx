@@ -20,6 +20,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff } from 'lucide-react';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -183,6 +184,7 @@ const RegisterForm = () => {
 					whileHover={{ scale: 1.05 }}
 					whileTap={{ scale: 0.95 }}
 					disabled={loading}
+					onClick={() => signIn('google', { callbackUrl: '/' })}
 				>
 					<FcGoogle className="mr-2" /> Continue with Google
 				</MotionButton>

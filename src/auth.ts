@@ -4,6 +4,7 @@ import Credentials from 'next-auth/providers/credentials';
 import { env } from './config/env';
 import connectDB from './lib/connectDB';
 import User from './model/user.model';
+import Google from 'next-auth/providers/google';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	providers: [
@@ -38,8 +39,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				};
 			},
 		}),
+		Google({
+			clientId: env.AUTH_GOOGLE_ID,
+			clientSecret: env.AUTH_GOOGLE_SECRET,
+		})
 	],
 	callbacks: {
+		async signIn({user, account}) {
+			if(account?.provider === 'google') {
+				await connectDB();
+				let dbUser = await User.findOne({ email: user.email });
+				if(!dbUser) {
+					dbUser = await User.create({
+						email: user.email,
+						name: user.name,
+						image: user.image,
+					});
+				}
+				user.id = dbUser._id.toString();
+				user.role = dbUser.role;
+			}
+			return true;
+		},
+
 		jwt({ token, user }) {
 			if (user) {
 				token.id = user.id;
