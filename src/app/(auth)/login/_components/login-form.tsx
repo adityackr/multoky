@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button, MotionButton } from '@/components/ui/button';
 import {
 	Card,
 	CardContent,
@@ -19,7 +19,6 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Spinner } from '@/components/ui/spinner';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { motion } from 'framer-motion';
 import { Eye, EyeOff } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
@@ -36,8 +35,6 @@ const LoginSchema = z.object({
 });
 
 type LoginSchema = z.infer<typeof LoginSchema>;
-
-const MotionButton = motion.create(Button);
 
 export const LoginForm = () => {
 	const [showPassword, setShowPassword] = useState(false);

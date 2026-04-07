@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button, MotionButton } from '@/components/ui/button';
 import {
 	Card,
 	CardContent,
@@ -18,7 +18,6 @@ import { Separator } from '@/components/ui/separator';
 import { Spinner } from '@/components/ui/spinner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
-import { motion } from 'framer-motion';
 import { Eye, EyeOff } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
@@ -36,8 +35,6 @@ const registerFormSchema = z.object({
 });
 
 type RegisterFormValues = z.infer<typeof registerFormSchema>;
-
-const MotionButton = motion.create(Button);
 
 const RegisterForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
