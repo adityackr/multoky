@@ -2,7 +2,6 @@ import { auth } from '@/auth';
 import connectDB from '@/lib/connectDB';
 import User from '@/model/user.model';
 import { redirect } from 'next/navigation';
-import { UpdateInfo } from './_components/update-info';
 
 const Home = async () => {
 	await connectDB();
@@ -17,7 +16,7 @@ const Home = async () => {
 		!user.role || !user.phone || (!user.phone && user.role === 'user');
 
 	if (incomplete) {
-		return <UpdateInfo />;
+		redirect('/update-info');
 	}
 
 	return (

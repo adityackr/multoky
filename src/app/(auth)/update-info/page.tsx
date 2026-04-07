@@ -37,7 +37,7 @@ const roleSchema = z.object({
 
 type RoleValues = z.infer<typeof roleSchema>;
 
-export const UpdateInfo = () => {
+const UpdateInfoPage = () => {
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
@@ -170,3 +170,5 @@ export const UpdateInfo = () => {
 		</AnimatePresence>
 	);
 };
+
+export default UpdateInfoPage;
